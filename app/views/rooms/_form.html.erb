@@ -1,0 +1,45 @@
+<%= form_with(model: room) do |form| %>
+  <% if room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+      <ul>
+        <% room.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label :hotel_name %>
+    <%= form.text_field :hotel_name , class:"form-control"%>
+  </div>
+
+  <div class="field form-check">
+    <%= form.check_box :status , class:"form-check-input"%>
+    <%= form.label "Available" ,class:"form-check-label" %>
+  </div>
+  <br>
+  <div class="field form-group">
+    <%= form.label :price %>
+    <%= form.number_field :price, class:"form-control" %>
+  </div>
+
+
+  <div class="field form-group">
+    <%= select_tag(:type, options_for_select([["AC","AC"],["No-AC","NON AC"]], params[:type] ), class:"form-control") %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :no_of_beds %>
+    <%= form.number_field :no_of_beds, class:"form-control" %>
+  </div>
+   <div class="field form-group">
+    <%= form.label :hotel_id %>
+    <%= form.number_field :hotel_id, class:"form-control" , value:current_hotel.id %>
+  </div>
+  <div class="actions">
+    <%= form.submit class:"btn btn-primary" %>
+  </div>
+<% end %>

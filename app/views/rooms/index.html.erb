@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Rooms</h1>
+
+<table class="table table-striped ">
+  <thead style="background-color: #e3f2fd;">
+    <tr>
+      <th>Room Number</th>
+      <th>Hotel name</th>
+      <th>Available</th>
+      <th>Price</th>
+      <th>Type</th>
+      <th>No of beds</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+      <td><%= room.id %></td>
+        <td><%= room.hotel_name %></td>
+        <td>
+          <% if room.status %>
+            Yes
+          <% else %>
+            No
+          <% end %>
+        </td>
+        <td><%= room.price %></td>
+        <td><%= room.type %></td>
+        <td><%= room.no_of_beds %></td>
+        <td><%= link_to 'Change', rooms_changestatus_path %></td>   
+        <td><%= link_to 'Show', room %></td>
+        <td><%= link_to 'Edit', edit_room_path(room) %></td>
+        <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Room', new_room_path,class:"btn btn-secondary" %>
