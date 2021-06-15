@@ -12,8 +12,12 @@
   <% end %>
 
   <div class="field form-group">
-    <%= form.label :hotel_name %>
-    <%= form.text_field :hotel_name , class:"form-control"%>
+    <%= form.label :room_no %>
+    <%= form.text_field :room_no , class:"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.text_field :hotel_name , class:"form-control",value:current_hotel.name ,id: :room_hotel_name ,type: :hidden %>
   </div>
 
   <div class="field form-check">
@@ -26,19 +30,31 @@
     <%= form.number_field :price, class:"form-control" %>
   </div>
 
+ <%
+=begin%>
+ <div class="field form-group">
+    <%= select_tag(:room_type, options_for_select([["AC","AC"],["No-AC","NONAC"]], params[:type] ), class:"form-control") %>
+  </div>   
+<%
+=end%>
 
-  <div class="field form-group">
-    <%= select_tag(:type, options_for_select([["AC","AC"],["No-AC","NON AC"]], params[:type] ), class:"form-control") %>
-  </div>
+ <div class="field form-group">
+     <%= form.label :room_type %>
+    <%= form.text_field :room_type, class:"form-control" %>
+  </div>  
 
   <div class="field form-group">
     <%= form.label :no_of_beds %>
     <%= form.number_field :no_of_beds, class:"form-control" %>
   </div>
    <div class="field form-group">
-    <%= form.label :hotel_id %>
-    <%= form.number_field :hotel_id, class:"form-control" , value:current_hotel.id %>
+    <%= form.number_field :hotel_id, class:"form-control" , value:current_hotel.id ,id: :room_hotel_id,type: :hidden %>
   </div>
+  <%
+=begin%>
+ <%= current_hotel.inspect %> 
+<%
+=end%>
   <div class="actions">
     <%= form.submit class:"btn btn-primary" %>
   </div>

@@ -1,29 +1,20 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Hotel name:</strong>
-  <%= @room.hotel_name %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @room.status %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @room.price %>
-</p>
-
-<p>
-  <strong>Type:</strong>
-  <%= @room.type %>
-</p>
-
-<p>
-  <strong>No of beds:</strong>
-  <%= @room.no_of_beds %>
-</p>
-
-<%= link_to 'Edit', edit_room_path(@room) %> |
-<%= link_to 'Back', rooms_path %>
+<div class="card">
+  <div class="card-header">
+    <%= @room.room_no %>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><%= @room.hotel_name %></h5>
+    <p class="card-text">Price : <%= @room.price %> </p>
+    <p class="card-text">Status : 
+      <% if @room.status %>
+            Available
+          <% else %>
+            Not Available
+          <% end %>
+    </p>
+    <p class="card-text">Type : <%= @room.room_type %> </p>
+    <p class="card-text">No.of.Beds : <%= @room.no_of_beds %> </p>
+    <%= link_to 'Edit', edit_room_path(@room) ,class:"btn btn-secondary" %>
+  <%= link_to 'Back', rooms_path ,class:"btn btn-dark" %>
+  </div>
+</div>

@@ -1,6 +1,9 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Rooms</h1>
+<%
+=begin%>
+ <p id="notice"><%= notice %></p> 
+<%
+=end%>
+<% if hotel_signed_in? %>
 
 <table class="table table-striped ">
   <thead style="background-color: #e3f2fd;">
@@ -17,8 +20,9 @@
 
   <tbody>
     <% @rooms.each do |room| %>
+      <% if room.hotel == current_hotel %>
       <tr>
-      <td><%= room.id %></td>
+      <td><%= room.room_no %></td>
         <td><%= room.hotel_name %></td>
         <td>
           <% if room.status %>
@@ -28,13 +32,14 @@
           <% end %>
         </td>
         <td><%= room.price %></td>
-        <td><%= room.type %></td>
+        <td><%= room.room_type %></td>
         <td><%= room.no_of_beds %></td>
-        <td><%= link_to 'Change', rooms_changestatus_path %></td>   
+        <td><%= link_to 'Change', change_status_path(room) %></td>   
         <td><%= link_to 'Show', room %></td>
         <td><%= link_to 'Edit', edit_room_path(room) %></td>
         <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
@@ -42,3 +47,7 @@
 <br>
 
 <%= link_to 'New Room', new_room_path,class:"btn btn-secondary" %>
+
+<% else %>
+  <h1>Room Booking Application</h1>
+<% end %>
