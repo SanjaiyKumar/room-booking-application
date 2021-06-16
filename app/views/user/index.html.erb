@@ -1,0 +1,19 @@
+<% if user_signed_in? %>
+
+
+<div class="row m-4">
+    <% @hotels.each do |hotel| %>
+        <div class="card col-sm-5 m-3" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title"><%= hotel.name %></h5>
+                <h6 class="card-subtitle mb-2 text-muted"><%= hotel.address %></h6>
+                <p class="card-text"><%= hotel.phoneno %> | <%= hotel.email %></p>
+                <%= link_to "Book Now" , user_hotel_showroom_path(hotel) ,class:"card-link btn btn-success" %>
+                <%= link_to "View Details" , user_hotel_show_path(hotel), class:" card-link btn btn-primary"%>
+            </div>
+        </div>
+    <% end %>
+</div>
+<% else %>
+  <h1>Room Booking Application</h1>
+<% end %>

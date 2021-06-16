@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-header">
+    <%= @hotel.name %>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><%= @hotel.address %></h5>
+    <p class="card-text">Price : <%= @hotel.phoneno %> </p>
+    <p class="card-text">Type : <%= @hotel.email %> </p>
+    <p class="card-text">No.of.Beds : <%= @hotel.room_count %> </p>
+    <%= link_to 'Back', user_hotel_index_path ,class:"btn btn-dark" %>
+  </div>
+</div>
