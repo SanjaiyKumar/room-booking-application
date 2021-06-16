@@ -25,6 +25,9 @@ hotel
            <strong><%= link_to "Sign Out" ,destroy_hotel_session_path,method: :delete ,class:"nav-link" %> </strong>
         </li>
       <% elsif user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to 'Book Room', user_hotel_index_path , class:"nav-link" %>
+          </li>
          <li class="nav-item">
           <%= link_to 'Edit Profile', edit_user_registration_path , class:"nav-link" %>
         </li>
