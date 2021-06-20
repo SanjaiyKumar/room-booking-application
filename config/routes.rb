@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'user/:id/show' ,:to => 'user#show' , as: :user_hotel_show
   get 'user/:id/showroom' ,:to => 'user#showroom' , as: :user_hotel_showroom
   get 'user/:id/bookingpage' ,:to => 'user#bookingpage' , as: :user_bookingpage
+  post 'user/:id/bookingpage' ,:to => 'user#book' 
+  get 'logs' , :to => 'user#showlogs' ,as: :logs
+  get 'hotellogs' , :to => 'hotel#hotellogs' ,as: :hotellogs
   devise_for :hotels
   get '/rooms/:id/changestatus/' , :to => 'rooms#changestatus' , as: :change_status 
   resources :rooms

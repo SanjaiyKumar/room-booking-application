@@ -1,15 +1,17 @@
 <div class="row">
     <% if @count ==1 %>
-        <div class="card col-sm-5 m-3" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title"><%= room.room_no %></h5>
-            <h6 class="card-subtitle mb-2 text-muted"><%= @hotel.name %></h6>
-            <p class="card-text">Price : <%= room.price %></p>
-            <p class="card-text">Type : <%= room.room_type %></p>
-            <p class="card-text"><%= room.room_no %></p>
-            <%= link_to 'Book Now', user_bookingpage_path(room) ,class:"btn btn-success" %>
-        </div>
-    </div>
+        <% @rooms.each do |room| %>
+            <div class="card col-sm-5 m-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title"><%= room.room_no %></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= @hotel.name %></h6>
+                    <p class="card-text">Price : <%= room.price %></p>
+                    <p class="card-text">Type : <%= room.room_type %></p>
+                    <p class="card-text">Beds : <%= room.no_of_beds %></p>
+                    <%= link_to 'Book Now', user_bookingpage_path(room) ,class:"btn btn-success" %>
+                </div>
+            </div>
+        <% end %>
     <% elsif @count==0 %>
         <div class="card-body">
             <h3 class="card-title">No rooms available right now.</h3>
