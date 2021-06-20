@@ -1,0 +1,21 @@
+<% if user_signed_in? %>
+    <% if !@logs.empty? %>
+        <div class="row m-4">
+            <% @logs.each do |log| %>
+                <div class="card col-sm-5 m-3" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong><%= log.hotel_name %></strong></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><strong><%= log.room_no %></strong></h6> 
+                        <p class="card-text"><strong>Start Date :</strong> <%= log.start_date %></p>
+                        <p class="card-text"><strong>End Date :</strong><%= log.end_date %></p>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+        <% else %>
+        <h3>No logs.</h3>
+    <% end %>
+    <%= link_to 'Back', search_hotel_path ,class:"btn btn-dark" %>
+<% else %>
+  <h1>Room Booking Application</h1>
+<% end %>

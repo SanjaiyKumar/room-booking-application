@@ -1,0 +1,35 @@
+<h4><strong><%= @room.room_no %></strong></h3>
+<h4><strong><%= @room.hotel.name %></strong></h4>
+<h5>Type : <%= @room.room_type %></h5>
+<h5>Price : <%= @room.price %></h5>
+<h5>Beds : <%= @room.no_of_beds %></h5>
+<hr>
+
+<%= form_with(model: log) do |form| %>
+  <div class="field form-group">
+    <%= form.text_field :hotel_id ,value:@room.hotel_id , class:"form-control" ,type: :hidden%>
+  </div>
+    <div class="field form-group">
+    <%= form.text_field :user_id ,value:current_user.id , class:"form-control" ,type: :hidden %>
+  </div>
+  <div class="field form-group">
+    <%= form.text_field :hotel_name ,value: @room.hotel.name , class:"form-control",type: :hidden%>
+  </div>
+  <div class="field form-group">
+    <%= form.text_field :room_no ,value: @room.room_no , class:"form-control",type: :hidden%>
+  </div>
+  <div class="field form-group">
+    <%= form.text_field :room_id ,value: @room.id , class:"form-control" ,type: :hidden %>
+  </div>
+  <div class="field form-group">
+    <label for="start_date">Start Date</label>
+    <input type="date" id="start_date" name="start_date"  class="form-control" required>
+  </div>
+  <div class="field form-group">
+   <label for="end_date">End Date</label>
+    <input type="date" id="end_date" name="end_date"  class="form-control" required>
+  </div>
+  <div class="actions">
+    <%= form.submit "Book", class:"btn btn-primary" %>
+  </div>
+<% end %>

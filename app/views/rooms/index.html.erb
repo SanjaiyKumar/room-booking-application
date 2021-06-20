@@ -11,10 +11,11 @@
       <th>Room Number</th>
       <th>Hotel name</th>
       <th>Available</th>
+      <th colspan="1"></th>
       <th>Price</th>
       <th>Type</th>
       <th>No of beds</th>
-      <th colspan="4"></th>
+      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -31,10 +32,10 @@
             No
           <% end %>
         </td>
+        <td><%= link_to 'Change', change_status_path(room) %></td> 
         <td><%= room.price %></td>
         <td><%= room.room_type %></td>
-        <td><%= room.no_of_beds %></td>
-        <td><%= link_to 'Change', change_status_path(room) %></td>   
+        <td><%= room.no_of_beds %></td>  
         <td><%= link_to 'Show', room %></td>
         <td><%= link_to 'Edit', edit_room_path(room) %></td>
         <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
