@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   get 'user/index' ,:to => 'user#index' , as: :user_hotel_index
   get 'user/searchhotel' ,:to => 'user#searchhotel' , as: :search_hotel
   get 'user/:id/show' ,:to => 'user#show' , as: :user_hotel_show
