@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light navbar-expand-lg" style="background-color: #a1d7ff;">
+<nav class="navbar navbar-light navbar-expand-lg" style="background-color:#89CFF0;">
 <span class="material-icons mx-2" style="font-size: 36px;">
 hotel
 </span>
@@ -7,7 +7,7 @@ hotel
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav  mr-auto my-3">     
+    <ul class="navbar-nav mr-auto my-3">     
        <% if hotel_signed_in? %>
         <li class="nav-item">
           <%= link_to "Rooms" ,rooms_path ,class:"nav-link" %>
@@ -57,5 +57,6 @@ hotel
         </li>
       <% end %>
     </ul>
+    <strong> <%= link_to "Admin", new_admin_user_session_path ,class:"btn btn-outline-primary" %></strong>
   </div>
 </nav>
