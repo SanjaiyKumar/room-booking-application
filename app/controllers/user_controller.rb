@@ -32,21 +32,40 @@ class UserController < ApplicationController
     @log.user_id= params[:user_id]
     @log.room_no= params[:room_no]
 
-    respond_to do |format|
-      if @log.save
-        @rom = Room.find(params[:id])
-        @stat = !@rom.status
-        @rom.update(status: @stat)
-        format.html { redirect_to root_path, notice: "Room was successfully Booked." }
-      else
-        # format.html { render :new, status: :unprocessable_entity }
-        # format.json { render json: @log.errors, status: :unprocessable_entity }
+    if validDate(params[:start_date],params[:end_date])
+      respond_to do |format|
+        if @log.save
+          @rom = Room.find(params[:id])
+          @stat = !@rom.status
+          @rom.update(status: @stat)
+          format.html { redirect_to root_path, notice: "Room was successfully Booked." }
+        else
+          format.html { redirect_to user_bookingpage_path , notice: " Start and End Date must be given" }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to user_bookingpage_path , notice: "Give a valid start and end date" }
       end
     end
+    
   end
 
   def showlogs
     @logs = current_user.logs.all
+  end
+
+  def validDate(sdate,edate)
+    valid = false
+    if Date.today == Date.parse(sdate) || Date.today < Date.parse(sdate)
+      valid = true
+    end
+    if Date.parse(sdate) < Date.parse(edate) ||  Date.parse(sdate) == Date.parse(edate)
+      valid = true
+    else
+      valid = false
+    end
+    return valid
   end
 
 end
