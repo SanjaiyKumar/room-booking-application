@@ -9,10 +9,10 @@ ActiveAdmin.register Log do
   #
   # or
   #
-  # permit_params do
-  #   permitted = [:hotel_id, :user_id, :room_id, :start_date, :end_date, :hotel_name, :room_no]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  permit_params do
+    permitted = [:hotel_id, :user_id, :room_id, :start_date, :end_date, :hotel_name, :room_no]
+    permitted << :other if params[:action] == 'create' && current_user.admin?
+    permitted
+  end
   
 end

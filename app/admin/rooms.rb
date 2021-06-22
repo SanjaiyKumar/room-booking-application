@@ -9,10 +9,10 @@ ActiveAdmin.register Room do
   #
   # or
   #
-  # permit_params do
-  #   permitted = [:hotel_name, :status, :price, :room_type, :no_of_beds, :hotel_id, :room_no]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  permit_params do
+    permitted = [:hotel_name, :status, :price, :room_type, :no_of_beds, :hotel_id, :room_no]
+    permitted << :other if params[:action] == 'create' && current_user.admin?
+    permitted
+  end
   
 end
