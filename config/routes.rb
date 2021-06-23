@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       resources :hotels
+      resources :users
+      get 'hotels/:id/hotelrooms' ,:to => 'hotels#hotelrooms'
+      get 'users/:id/userlogs' ,:to => 'users#userlogs'
     end
   end
 
