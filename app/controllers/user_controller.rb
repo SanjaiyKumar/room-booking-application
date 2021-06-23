@@ -33,11 +33,9 @@ class UserController < ApplicationController
     @log.room_no= params[:room_no]
 
     if validDate(params[:start_date],params[:end_date])
+      $rom = Room.find(params[:id])
       respond_to do |format|
         if @log.save
-          @rom = Room.find(params[:id])
-          @stat = !@rom.status
-          @rom.update(status: @stat)
           format.html { redirect_to root_path, notice: "Room was successfully Booked." }
         else
           format.html { redirect_to user_bookingpage_path , notice: " Start and End Date must be given" }
