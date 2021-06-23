@@ -3,7 +3,7 @@ module Api
       class HotelsController < ApplicationController
         respond_to :json
         protect_from_forgery with: :null_session
-        before_action :find_hotel , only: [:show,:update,:destroy]
+        before_action :find_hotel , only: [:show,:update,:destroy,:hotelrooms]
   
         def index
           @hotels = Hotel.all
@@ -11,7 +11,11 @@ module Api
         end
 
         def show 
-          render json:@hotel
+          if @hotel
+            render json: {hotel: @hotel ,message: "Successfull"} , status:200
+          else
+            render json: {error: "No Hotel Found"} , status:400
+          end
         end
 
         def create
@@ -32,7 +36,7 @@ module Api
         def update
           if @hotel
             @hotel.update(hotel_params)
-            render json: {message: "Successfully updated"} , status:200
+            render json: {hotel:@hotel ,message: "Successfully updated"} , status:200
           else
             render error: {error: "Unable to update"} , status:400
           end
@@ -43,7 +47,16 @@ module Api
             @hotel.destroy
             render json: {message: "Successfully Deleted"} , status:200
           else
-            render error: {error: "Unable to update"} , status:400
+            render error: {error: "Unable to Delete"} , status:400
+          end
+        end
+
+        def hotelrooms
+          if @hotel
+            @rooms = Room.where(hotel_id: @hotel.id)
+            render json: {hotel: @hotel , rooms:@rooms , message: "Successfull"} , status:200
+          else
+            render json: {error: "No Hotel Found"} , status:400
           end
         end
 
