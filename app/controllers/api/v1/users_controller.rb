@@ -1,6 +1,7 @@
 module Api
     module V1
       class UsersController < ApplicationController
+        before_action :doorkeeper_authorize!
         respond_to :json
         protect_from_forgery with: :null_session
         before_action :find_user , only: [:show,:update,:destroy,:userlogs]
