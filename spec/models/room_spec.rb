@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe Room, type: :model do
   
   before do
-    @hotel = Hotel.new(email:"test@tet.com",password:"Qwert!13svs4",name:"Adengappa",phoneno:"7894561131",address:"Coimbatore",room_count:5)
-    @hotel.save
+    @hotel = create(:hotel)
   end
 
   context "Validation Test" do
@@ -29,8 +28,8 @@ RSpec.describe Room, type: :model do
       expect(room).to eq(false)
     end
     it "save successfully" do
-      room= Room.new(room_no:"A06",room_type:"AC",no_of_beds:4,price:500,hotel_id:@hotel.id,hotel_name:"Paradox",status: true).save
-      expect(room).to eq(true)
+      room= create(:room,hotel_id:@hotel.id)
+      expect(room.persisted?).to eq(true)
     end
   end
 
