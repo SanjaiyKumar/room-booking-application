@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Rooms", type: :request do
     hotel = Hotel.first_or_create!(email:"test@test.com",password:"Qwert!13svs4",name:"Adengappa",phoneno:"7894161131",address:"Coimbatore",room_count:5)
-    let (:params) {{room_no:"A06",room_type:"AC",no_of_beds:4,price:500,hotel_id:hotel.id,hotel_name:"Paradox",status: true}}
+    let (:params) {{room_no:"A01",room_type:"AC",no_of_beds:4,price:500,hotel_id:hotel.id,hotel_name:hotel.name,status: true}}
 
     context "Get #index" do
       it "Successfull Response" do
@@ -31,9 +31,11 @@ RSpec.describe "Rooms", type: :request do
         expect(response).to_not be_successful
       end
       it "Successfull Response" do
-        sign_in hotel
+        # sign_in hotel
+        allow_any_instance_of(RoomsController).to receive(:authenticate_hotel!) {true}
+        allow_any_instance_of(RoomsController).to receive(:current_hotel) {hotel}
         post rooms_path(room:params)
-        expect(response).to be_successful
+        expect(response).to have_http_status(302)
       end
     end
 
