@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe "UsersController", type: :request do
+RSpec.describe "Api::V1::UsersController", type: :request do
     
     let (:params) {{email:"Tester@tester.com", password:"Qwert!223", name:"Tester" , phoneno:"789456131" , address:"Tirunelveli"}}
     let (:update_params) {{email:"Tester@tester.com", password:"Qwert!223", name:"Rspec_Tester" , phoneno:"789456131" , address:"Tirunelveli"}}
 
     before {
       @user =User.create(params)
-      # allow_any_instance_of(UsersController).to receive(:doorkeeper_authorize!) {true}
+      allow_any_instance_of(Api::V1::UsersController).to receive(:doorkeeper_authorize!) {true}
     }
 
     context "Get #index" do
@@ -40,7 +40,6 @@ RSpec.describe "UsersController", type: :request do
 
     context "Put #update" do
       it "Successfull Response" do
-        # put "api_v1_user_path/#{@user.id}" , params: {name:"Rspec Tester"}
         put api_v1_users_path+"/"+@user.id.to_s , params: {user:update_params}
         expect(response).to be_successful
       end

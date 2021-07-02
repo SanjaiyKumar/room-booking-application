@@ -8,8 +8,8 @@ RSpec.describe Room, type: :model do
 
   context "Validation Test" do
     it "check price presence" do
-      room= Room.new(room_no:'r1',room_type:'AC',no_of_beds:4,hotel_id:@hotel.id).save
-      expect(room).to eq(false)
+      room = build(:room , price:nil ,hotel_id:@hotel.id)
+      expect(room.save).to eq(false)
     end
     it "check room_type presence" do
       room= Room.new(room_no:'r1',price:500,no_of_beds:4,hotel_id:@hotel.id).save

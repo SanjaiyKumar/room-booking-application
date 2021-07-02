@@ -13,13 +13,13 @@ RSpec.describe "Rooms", type: :request do
 
     context "Get #show" do
       it "Not Successfull Response" do
-        room =Room.create(params)
+        room = create(:room,hotel_id:hotel.id)
         get room_path(room)
         expect(response).to_not be_successful
       end
       it "Successfull Response" do
         sign_in hotel
-        room =Room.create(params)
+        room = create(:room,hotel_id:hotel.id)
         get room_path(room)
         expect(response).to be_successful
       end
@@ -27,14 +27,14 @@ RSpec.describe "Rooms", type: :request do
 
     context "Post #create" do
       it "Not Successfull Response" do
-        post rooms_path(params)
+        post rooms_path(:room,hotel_id:hotel.id)
         expect(response).to_not be_successful
       end
       it "Successfull Response" do
         # sign_in hotel
         allow_any_instance_of(RoomsController).to receive(:authenticate_hotel!) {true}
         allow_any_instance_of(RoomsController).to receive(:current_hotel) {hotel}
-        post rooms_path(room:params)
+        post rooms_path(room: params)
         expect(response).to have_http_status(302)
       end
     end
