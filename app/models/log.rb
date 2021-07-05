@@ -11,6 +11,7 @@ class Log < ApplicationRecord
         $rom.update(status: @stat)
     end
 
+    private
     def validDate
         if Date.parse(start_date) < Date.today
             self.errors.add(:start_date,:must_valid,message: "Invalid Booking Date")
