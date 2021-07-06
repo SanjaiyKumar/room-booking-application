@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-header">
+    <h2>Add Address</h2>
+  </div>
+  <div class="card-body">
+  <%= form_with do |f| %>
+    <div class="field form-group">
+      <%= f.label :location %><br />
+      <%= f.text_field :location, autofocus: true, autocomplete: "location",class:"form-control" %>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :pincode %><br />
+      <%= f.number_field :pincode, autofocus: true, autocomplete: "pincode",class:"form-control" %>
+    </div> 
+
+    <div class="actions">
+      <%= f.submit "Add" ,class:"btn btn-primary"%>
+    </div>
+  <% end %>
+<br>
+
+  </div>
+</div>
