@@ -2,7 +2,9 @@ class UserController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @hotels = Hotel.where(address: params[:location])
+    @address = Address.find_by(location: params[:location])
+    @hotels=Hotel.where(address_id: @address.id)
+
   end
 
   def show

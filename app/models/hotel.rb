@@ -5,6 +5,8 @@ class Hotel < ApplicationRecord
          :recoverable, :rememberable, :validatable
          has_many :rooms, dependent: :destroy
          has_many :logs
+         has_one :address
+         has_one :pincode, :through => :address
          PASSWORD_FORMAT = /\A
          (?=.{8,})         
          (?=.*\d)           

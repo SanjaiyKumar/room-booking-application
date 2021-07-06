@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   get 'user/:id/bookingpage' ,:to => 'user#bookingpage' , as: :user_bookingpage
   post 'user/:id/bookingpage' ,:to => 'user#book' 
   get 'logs' , :to => 'user#showlogs' ,as: :logs
-  get 'hotellogs' , :to => 'hotel#hotellogs' ,as: :hotellogs
+  get 'hotellogs' , :to => 'hotel#hotellogs' ,as: :hotellogs 
+  get 'hotels/addaddress' , :to => 'hotel#addaddress' ,as: :hoteladdress
+  post 'hotels/addaddress' , :to => 'hotel#add' 
   devise_for :hotels
   get '/rooms/:id/changestatus/' , :to => 'rooms#changestatus' , as: :change_status 
   resources :rooms

@@ -23,10 +23,14 @@
     <%= f.number_field :room_count, autofocus: true, autocomplete: "room_count",class:"form-control" %>
   </div>
 
-    <div class="field form-group">
+    <%
+=begin%>
+ <div class="field form-group">
     <%= f.label :address %><br />
     <%= f.text_field :address, autofocus: true, autocomplete: "address",class:"form-control" %>
-  </div>
+  </div> 
+<%
+=end%>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
