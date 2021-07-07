@@ -7,8 +7,10 @@ class Log < ApplicationRecord
     after_save :statusUpdate
 
     def statusUpdate
-        @stat = !$rom.status
-        $rom.update(status: @stat)
+        if !$rom.nil?
+            @stat = !$rom.status
+            $rom.update(status: @stat)
+        end
     end
 
     private

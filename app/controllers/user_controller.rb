@@ -2,9 +2,22 @@ class UserController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @address = Address.find_by(location: params[:location])
-    @hotels=Hotel.where(address_id: @address.id)
+    #Using PLUCK
+    # @address = Address.where(location: params[:location])
+    # @hotel_ids = @address.pluck(:hotel_id)
+    # @hotels=Hotel.where(id: @hotel_ids)
 
+    #Using JOINS
+    if params[:location] != ""
+      @hotels = Hotel.joins(:address).where("addresses.location = ? ", params[:location].capitalize)
+    elsif params[:pincode] !=""
+      @hotels = Hotel.joins(:pincode).where("pincode= #{params[:pincode]}")
+    elsif params[:location] != "" && params[:pincode] !=""
+      @hotels = Hotel.joins(:address).where("addresses.location = ? ", params[:location].capitalize)
+    else
+      redirect_to search_hotel_path, notice: "Enter Pincode or Location to search for Hotels"
+    end
+    
   end
 
   def show
@@ -39,7 +52,7 @@ class UserController < ApplicationController
         if @log.save
           format.html { redirect_to root_path, notice: "Room was successfully Booked." }
         else
-          format.html { redirect_to user_bookingpage_path , notice: "Give a Valid Date" }
+          format.html { redirect_to user_bookingpage_path , notice: "Give a Valid Start Date and End Date " }
         end
     end
     

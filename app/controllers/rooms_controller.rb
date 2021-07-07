@@ -5,8 +5,16 @@ class RoomsController < ApplicationController
 
   # GET /rooms or /rooms.json
   def index
-    @rooms = Room.all
-    @rooms = Room.order("room_no").includes(:hotel)
+    if !current_hotel.nil?
+      @rooms = Room.where(hotel_id:current_hotel.id).order("room_no")
+      respond_to do |format|
+        format.html
+        format.csv {send_data @rooms.to_csv}
+      end
+    end
+    if !current_user.nil?
+      @near_by_hotels = Hotel.joins(:address).where("addresses.location = ? ",current_user.address)
+    end
   end
 
   # GET /rooms/1 or /rooms/1.json

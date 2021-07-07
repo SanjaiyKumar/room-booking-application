@@ -4,7 +4,6 @@
 <%
 =end%>
 <% if hotel_signed_in? %>
-
 <table class="table table-striped ">
   <thead style="background-color: #e3f2fd;">
     <tr>
@@ -21,15 +20,14 @@
 
   <tbody>
     <% @rooms.each do |room| %>
-      <% if room.hotel == current_hotel %>
       <tr>
       <td><%= room.room_no %></td>
         <td><%= room.hotel_name %></td>
         <td>
           <% if room.status %>
-            Yes
+            <i class="fas fa-toggle-on"></i> Yes
           <% else %>
-            No
+            <i class="fas fa-toggle-off"></i> No
           <% end %>
         </td>
         <td><%= link_to 'Change', change_status_path(room) %></td> 
@@ -40,15 +38,40 @@
         <td><%= link_to 'Edit', edit_room_path(room) %></td>
         <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-      <% end %>
     <% end %>
   </tbody>
 </table>
 
 <br>
+  <%= link_to 'New Room', new_room_path,class:"btn btn-secondary" %>
+  <div class="btn btn-primary">
+    <i class="fas fa-file-csv fa-lg"></i>
+    <%= link_to 'Download CSV', "/rooms.csv",style:"color:white;text-decoration:none;" %>
+  </div>
 
-<%= link_to 'New Room', new_room_path,class:"btn btn-secondary" %>
-
-<% else %>
-  <h1>Room Booking Application</h1>
+<% elsif user_signed_in?%>
+  <h2>Best Hotels at your Location</h2>
+  <% if !@near_by_hotels.empty? %>
+          <div class="row m-4">
+              <% @near_by_hotels.each do |hotel| %>
+                  <div class="card col-sm-5 m-3" style="width: 18rem;">
+                      <div class="card-body">
+                          <h5 class="card-title"><strong> <i class="fas fa-hotel"></i> <%= hotel.name %></strong></h5>
+                          <h6 class="card-subtitle mb-2 text-muted"><strong> <i class="fas fa-map-marker-alt"></i> <%= hotel.address.location %></strong></h6> 
+                          <p class="card-text"> <span class="material-icons">
+meeting_room
+</span> <strong> Room Count :</strong> <%= hotel.room_count %></p>
+                          <p class="card-text"> <i class="fas fa-phone"></i> <%= hotel.phoneno %> | <i class="fas fa-envelope"></i> <%= hotel.email %></p>
+                          <%= link_to "Book Now" , user_hotel_roomlist_path(hotel) ,class:"card-link btn btn-success" %>
+                      </div>
+                  </div>
+              <% end %>
+          </div>
+          <% else %>
+          <h3>No Hotel Found at your location</h3>
+          <%= link_to "Search Hotel" , search_hotel ,class:"card-link btn btn-success" %>
+      <% end %> 
+  <% else %>
+  <h1 style="text-align:center;">Room Booking Application</h1>
+  <%= image_tag "room-booking.svg" , class:"svg" %>
 <% end %>

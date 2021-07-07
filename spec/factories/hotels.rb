@@ -4,7 +4,7 @@ FactoryBot.define do
     password {"Qwert!13svs4"}
     name {"Adengappa"}
     phoneno {"7894561131"}
-    address {"Coimbatore"}
+    address_id {"1"}
     room_count {5}
   end
 end

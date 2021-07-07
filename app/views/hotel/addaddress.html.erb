@@ -6,16 +6,16 @@
   <%= form_with do |f| %>
     <div class="field form-group">
       <%= f.label :location %><br />
-      <%= f.text_field :location, autofocus: true, autocomplete: "location",class:"form-control" %>
+      <%= f.text_field :location, autofocus: true, autocomplete: "location",class:"form-control",id:"location" %>
     </div>
 
     <div class="field form-group">
       <%= f.label :pincode %><br />
-      <%= f.number_field :pincode, autofocus: true, autocomplete: "pincode",class:"form-control" %>
+      <%= f.number_field :pincode, autofocus: true, autocomplete: "pincode",class:"form-control",id:"pincode" %>
     </div> 
 
     <div class="actions">
-      <%= f.submit "Add" ,class:"btn btn-primary"%>
+      <%= f.submit "Add" ,class:"btn btn-primary" ,:onclick => " return confirm('Please Confirm ?' + 'Location : '+ document.getElementById('location').value + ',Pincode : ' + document.getElementById('pincode').value)"%>
     </div>
   <% end %>
 <br>

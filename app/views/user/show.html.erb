@@ -1,12 +1,12 @@
 <div class="card">
   <div class="card-header">
-    <%= @hotel.name %>
+     <i class="fas fa-hotel"></i> <%= @hotel.name %>
   </div>
   <div class="card-body">
-    <h5 class="card-title"><%= @hotel.address.location %></h5>
-    <p class="card-text">Price : <%= @hotel.phoneno %> </p>
-    <p class="card-text">Type : <%= @hotel.email %> </p>
-    <p class="card-text">No.of.Beds : <%= @hotel.room_count %> </p>
+    <h5 class="card-title"><i class="fas fa-map-marker-alt"></i> <%= @hotel.address.location %></h5>
+    <p class="card-text"><i class="fas fa-phone"></i> Phoneno : <%= @hotel.phoneno %> </p>
+    <p class="card-text"><i class="fas fa-envelope"></i> Email : <%= @hotel.email %> </p>
+    <p class="card-text">No.of.Rooms : <%= @hotel.room_count %> </p>
     <%= link_to 'Back', search_hotel_path ,class:"btn btn-dark" %>
   </div>
 </div>

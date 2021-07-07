@@ -10,6 +10,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -18,14 +19,16 @@
 
   <body>
       <%= render "home/header" %>
-      <div class="container">
-      <br>
-        <% if notice %>
-        <%= render "layouts/alerts" %>
-        <% end %>
-        <%= yield %>
+      <div class="main-container">
+        <div class="container">
+          <br>
+          <% if flash[:alert] || notice %>
+            <%= render "layouts/alerts" %>
+          <% end %>
+          <%= yield %>
+        </div>
+        <%= render "home/footer" %>
       </div>  
-
 
   </body>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

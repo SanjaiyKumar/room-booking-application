@@ -3,6 +3,7 @@ class HotelController < ApplicationController
 
     def hotellogs
         @logs =current_hotel.logs.includes(:user)
+        puts current_hotel.address.location
     end
 
     def addaddress

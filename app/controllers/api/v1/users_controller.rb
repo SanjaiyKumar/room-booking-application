@@ -5,7 +5,8 @@ module Api
         respond_to :json
         protect_from_forgery with: :null_session
         before_action :find_user , only: [:show,:update,:destroy,:userlogs]
-  
+        before_action :findEmail , only: [:create]
+
         def index
           @users = User.all
           render json:@users
@@ -61,7 +62,18 @@ module Api
         end
 
         def find_user
-          @user = User.find(params[:id])
+          if User.where(id: params[:id]).empty?
+            render json:{message:"User not found"} , status:400
+          else
+            @user = User.find(params[:id])
+          end          
+        end
+
+        def findEmail
+          @email = User.find_by(email: params[:email])
+          if @email
+            render json:{message:"Email Id already exixts"} , status:200
+          end
         end
 
         def user_params
