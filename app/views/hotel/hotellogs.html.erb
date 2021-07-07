@@ -6,8 +6,8 @@
                     <div class="card-body">
                         <h5 class="card-title"><strong><%= User.find(log.user_id).name %></strong></h5>
                         <h6 class="card-subtitle mb-2 text-muted"><strong><%= log.room_no %></strong></h6> 
-                        <p class="card-text"><strong>Start Date :</strong> <%= log.start_date %></p>
-                        <p class="card-text"><strong>End Date :</strong><%= log.end_date %></p>
+                        <p class="card-text"><strong><i class="fas fa-hourglass-start"></i> Start Date :</strong> <%= log.start_date %></p>
+                        <p class="card-text"><strong><i class="fas fa-hourglass-end"></i> End Date :</strong><%= log.end_date %></p>
                     </div>
                 </div>
             <% end %>

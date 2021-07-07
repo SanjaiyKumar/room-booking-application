@@ -1,19 +1,19 @@
 <div class="card">
   <div class="card-header">
-    <%= @room.room_no %>
+     <i class="fas fa-hotel"></i> <%= @room.room_no %>
   </div>
   <div class="card-body">
     <h5 class="card-title"><%= @room.hotel_name %></h5>
     <p class="card-text">Price : <%= @room.price %> </p>
     <p class="card-text">Status : 
       <% if @room.status %>
-            Available
+            <i class="fas fa-toggle-on"></i> Available
           <% else %>
-            Not Available
+            <i class="fas fa-toggle-off"></i> Not Available
           <% end %>
     </p>
     <p class="card-text">Type : <%= @room.room_type %> </p>
-    <p class="card-text">No.of.Beds : <%= @room.no_of_beds %> </p>
+    <p class="card-text">No.of.Beds : <%= @room.no_of_beds %> <i class="fas fa-bed"></i> </p>
     <%= link_to 'Edit', edit_room_path(@room) ,class:"btn btn-secondary" %>
   <%= link_to 'Back', rooms_path ,class:"btn btn-dark" %>
   </div>

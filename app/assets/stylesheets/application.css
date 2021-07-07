@@ -13,3 +13,58 @@
  *= require rooms
  *= require_self
  */
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:ital@1&display=swap');
+ :root{
+    --color1: rgb(73, 151, 165);
+}
+.main-container{
+    position: relative;
+    min-height: 100vh;
+}
+.container{
+    padding-bottom: 150px;
+}
+body{
+    font-family: 'Poppins', sans-serif !important; 
+}
+.footer{
+    position: absolute;
+    bottom: 0;
+    width: 100% !important;
+    background-color: black;
+    height: 120px;
+    margin-top: 50px;
+    color: var(--color1);
+    list-style: none;
+}
+.footer h1{
+    font-size: 24px;
+}
+.container2{
+    height: 100%;
+    margin: 0 auto;
+    padding: 30px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.container2 li{
+    margin-top: 10px;
+    list-style: none;
+}
+.container2 a{
+    color: var(--color1);
+    text-decoration: none;
+    margin-left: 10px;
+    text-decoration: none;
+}
+.budes h2:hover{
+    color: white;
+    background-color: black;
+ }
+
+.svg{
+     width: 600px;
+     height: 600px;
+     margin: 0 150px;
+ }

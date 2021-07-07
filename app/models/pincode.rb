@@ -1,3 +1,4 @@
 class Pincode < ApplicationRecord
-    has_many :adresses
+    validates :pincode, presence: true 
+    has_many :addresses
 end

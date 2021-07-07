@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Rooms", type: :request do
-    hotel = Hotel.first_or_create!(email:"test@test.com",password:"Qwert!13svs4",name:"Adengappa",phoneno:"7894161131",address:"Coimbatore",room_count:5)
+    hotel = Hotel.first_or_create!(email:"test@test.com",password:"Qwert!13svs4",name:"Adengappa",phoneno:"7894161131",address_id:"1",room_count:5)
     let (:params) {{room_no:"A01",room_type:"AC",no_of_beds:4,price:500,hotel_id:hotel.id,hotel_name:hotel.name,status: true}}
 
     context "Get #index" do

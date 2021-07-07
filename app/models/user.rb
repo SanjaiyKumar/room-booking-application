@@ -18,4 +18,12 @@ class User < ApplicationRecord
             user = User.find_for_authentication(email: email)
             user&.valid_password?(password) ? user : nil
           end
+
+          def active_for_authentication?
+            super && !self.ban_status
+          end
+       
+          def inactive_message
+            "Your account has been banned"
+          end
 end

@@ -14,6 +14,8 @@ class Hotel < ApplicationRecord
          (?=.*[A-Z])        
          (?=.*[[:^alnum:]]) 
        /x
+
+       
        validates :password, 
         presence: true, 
         length: { in: Devise.password_length }, 
@@ -26,4 +28,12 @@ class Hotel < ApplicationRecord
           format: { with: PASSWORD_FORMAT }, 
           confirmation: true, 
           on: :update
+          
+          def active_for_authentication?
+            super && !self.ban_status
+          end
+       
+          def inactive_message
+            "Your account has been banned"
+          end
 end
