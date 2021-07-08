@@ -80,6 +80,15 @@ class RoomsController < ApplicationController
     redirect_to rooms_path , notice: "Not Authorized" if @room.nil?
   end
 
+  def import
+    room = Room.import(params[:file])
+    if room.persisted?
+      redirect_to root_path, notice: "Rooms imported successfully"
+    else
+      redirect_to root_path, notice: room.errors.full_messages
+    end
+   end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_room

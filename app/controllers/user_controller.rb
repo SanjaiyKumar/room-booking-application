@@ -60,6 +60,11 @@ class UserController < ApplicationController
 
   def showlogs
     @logs = current_user.logs.all
+
+    @hotels = current_user.hotels.distinct
+    @count = @logs.group(:hotel_name).count
+
+    @room_nos = @logs.joins(:hotel).distinct.pluck(:room_no,:hotel_name)
   end
 
   # def validDate(sdate,edate)

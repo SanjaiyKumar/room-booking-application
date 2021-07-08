@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Rooms", type: :request do
     hotel = Hotel.first_or_create!(email:"test@test.com",password:"Qwert!13svs4",name:"Adengappa",phoneno:"7894161131",address_id:"1",room_count:5)
     let (:params) {{room_no:"A01",room_type:"AC",no_of_beds:4,price:500,hotel_id:hotel.id,hotel_name:hotel.name,status: true}}
+    let (:update_params) {{room_no:"A06",room_type:"NON-AC",no_of_beds: 4, price:500 ,hotel_id:hotel.id,hotel_name:hotel.name,status:true}}
 
     context "Get #index" do
       it "Successfull Response" do
@@ -35,6 +36,36 @@ RSpec.describe "Rooms", type: :request do
         allow_any_instance_of(RoomsController).to receive(:authenticate_hotel!) {true}
         allow_any_instance_of(RoomsController).to receive(:current_hotel) {hotel}
         post rooms_path(room: params)
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    context "Post #update" do
+      it "Not Successfull Response" do
+        room = create(:room,hotel_id:hotel.id)
+        put rooms_path+"/"+room.id.to_s , params: {room:update_params}
+        expect(response).to_not be_successful
+      end
+      it "Successfull Response" do
+        allow_any_instance_of(RoomsController).to receive(:authenticate_hotel!) {true}
+        allow_any_instance_of(RoomsController).to receive(:current_hotel) {hotel}
+        room = create(:room,hotel_id:hotel.id)
+        put rooms_path+"/"+room.id.to_s , params: {room:update_params}
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    context "Post #destroy" do
+      it "Not Successfull Response" do
+        room = create(:room,hotel_id:hotel.id)
+        delete rooms_path+"/"+room.id.to_s
+        expect(response).to_not be_successful
+      end
+      it "Successfull Response" do
+        allow_any_instance_of(RoomsController).to receive(:authenticate_hotel!) {true}
+        allow_any_instance_of(RoomsController).to receive(:current_hotel) {hotel}
+        room = create(:room,hotel_id:hotel.id)
+        delete rooms_path+"/"+room.id.to_s
         expect(response).to have_http_status(302)
       end
     end

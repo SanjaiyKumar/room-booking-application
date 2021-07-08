@@ -15,6 +15,20 @@ ActiveAdmin.register User do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
+  action_item :ban , only: :show do
+    if !user.ban_status
+      link_to "Ban User", ban_admin_user_path(user) , method: :put
+    else
+      link_to "Unban" ,ban_admin_user_path(user) , method: :put
+    end
+  end
+
+  member_action :ban , method: :put do
+    user = User.find(params[:id])
+    user.update(ban_status: !user.ban_status)
+    redirect_to admin_user_path(user)
+  end
   
   index do
     selectable_column

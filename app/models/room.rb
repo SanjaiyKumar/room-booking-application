@@ -14,4 +14,12 @@ class Room < ApplicationRecord
             end
         end
     end
+
+    def self.import(file)
+        CSV.foreach(file.path, headers: true) do |row|
+          rooms_hash = row.to_hash
+          return create(rooms_hash) 
+       end
+    end
+
 end
