@@ -43,11 +43,24 @@
 </table>
 
 <br>
-  <%= link_to 'New Room', new_room_path,class:"btn btn-secondary" %>
-  <div class="btn btn-primary">
+ <div class="row">
+
+  <%= link_to 'New Room', new_room_path,class:"btn btn-secondary col-2 mx-2" %>
+
+  <div class="btn btn-primary col-2">
     <i class="fas fa-file-csv fa-lg"></i>
     <%= link_to 'Download CSV', "/rooms.csv",style:"color:white;text-decoration:none;" %>
-  </div>
+  </div> 
+
+  <%= form_tag import_rooms_path, multipart: true,class:"col-7 form-row" do%>
+    <div class="custom-file col-7">
+      <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+      <%= file_field_tag :file ,required: true , class:"custom-file-input" %>
+      <%= submit_tag "Import" ,class:"btn btn-success mt-2 "%>
+    </div>
+  <% end %>
+
+ </div>
 
 <% elsif user_signed_in?%>
   <h2>Best Hotels at your Location</h2>
@@ -58,9 +71,7 @@
                       <div class="card-body">
                           <h5 class="card-title"><strong> <i class="fas fa-hotel"></i> <%= hotel.name %></strong></h5>
                           <h6 class="card-subtitle mb-2 text-muted"><strong> <i class="fas fa-map-marker-alt"></i> <%= hotel.address.location %></strong></h6> 
-                          <p class="card-text"> <span class="material-icons">
-meeting_room
-</span> <strong> Room Count :</strong> <%= hotel.room_count %></p>
+                          <p class="card-text"> <span class="material-icons">meeting_room</span> <strong> Room Count :</strong> <%= hotel.room_count %></p>
                           <p class="card-text"> <i class="fas fa-phone"></i> <%= hotel.phoneno %> | <i class="fas fa-envelope"></i> <%= hotel.email %></p>
                           <%= link_to "Book Now" , user_hotel_roomlist_path(hotel) ,class:"card-link btn btn-success" %>
                       </div>

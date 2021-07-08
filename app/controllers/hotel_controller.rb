@@ -3,21 +3,21 @@ class HotelController < ApplicationController
 
     def hotellogs
         @logs =current_hotel.logs.includes(:user)
-        puts current_hotel.address.location
+        # puts current_hotel.address.location
     end
 
     def addaddress
-        @hotel = Hotel.find(current_hotel.id)
-        if !@hotel.address_id.nil?
+        hotel = Hotel.find(current_hotel.id)
+        if !hotel.address_id.nil?
             redirect_to root_path, notice: "Address has already been set Added"
         end
     end
 
     def add
-        @hotel = Hotel.find(current_hotel.id)
-        if @hotel.address_id.nil?
+        hotel = Hotel.find(current_hotel.id)
+        if hotel.address_id.nil?
             address_id = address_params
-            @hotel.update(address_id: address_id)
+            hotel.update(address_id: address_id)
             redirect_to root_path, notice: "Address Added Successfully!!"
         else
             redirect_to root_path, notice: "Already Address Added"

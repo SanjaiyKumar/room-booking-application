@@ -23,7 +23,9 @@ Rails.application.routes.draw do
   post 'hotels/addaddress' , :to => 'hotel#add' 
   devise_for :hotels
   get '/rooms/:id/changestatus/' , :to => 'rooms#changestatus' , as: :change_status 
-  resources :rooms
+  resources :rooms do
+    collection { post :import }
+  end
   devise_for :users
   
   # root 'home#index'

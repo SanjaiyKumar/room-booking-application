@@ -1,20 +1,60 @@
 <% if user_signed_in? %>
-    <% if !@logs.empty? %>
-        <div class="row m-4">
-            <% @logs.each do |log| %>
-                <div class="card col-sm-5 m-3" style="width: 18rem;">
+
+<% if !@hotels.empty? %>
+    <div id="accordion">
+        <% @hotels.each do |hotel| %>
+            <br>
+            <div class="card">
+                <div class="card-header" id="<%= hotel.name %>">
+                <h5 class="mb-0 row">
+                    <button class="btn btn-link col-sm-3" data-toggle="collapse" data-target="#<%= hotel.email %>" aria-expanded="true" aria-controls="<%= hotel.email %>">
+                        <strong>  <i class="fas fa-hotel"></i> <%= hotel.name %></strong>
+                    </button>
+                     <div class="col-sm-4"></div>
+                    <div class="col-sm-2 btn btn-warning"><%= hotel.address.location %> </div>
+                    <div class="col-sm-3">
+                        <div class="btn btn-info ">
+                            Booked : <span class="badge badge-light"><strong><%= @count[hotel.name] %></strong></span> Times
+                        </div>
+                    </div>
+                </h5>
+                </div>
+                <div id="<%= hotel.email %>" class="collpse show" aria-labelledby="<%= hotel.name %>" data-parent="#accordion">
                     <div class="card-body">
-                        <h5 class="card-title"><strong>  <i class="fas fa-hotel"></i> <%= log.hotel_name %></strong></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><strong><%= log.room_no %></strong></h6> 
-                        <p class="card-text"><strong> <i class="fas fa-hourglass-start"></i> Start Date :</strong> <%= log.start_date %></p>
-                        <p class="card-text"><strong> <i class="fas fa-hourglass-end"></i> End Date :</strong><%= log.end_date %></p>
+                        <h5 class="card-title"><strong>Rooms Booked in the past : </h5>
+                        <% @room_nos.each do |room_no,hotel_name| %>
+                            <% if  hotel_name == hotel.name %>
+                                <h6 class="btn btn-info"><strong><%= room_no %></strong></h6> 
+                            <% end %>
+                        <% end %>
                     </div>
                 </div>
-            <% end %>
-        </div>
-        <% else %>
-        <h3>No logs.</h3>
-    <% end %>
+            </div>
+        <% end %>
+    </div>
+    <% else %>
+    <h3>No logs.</h3>
+<% end %>
+<br>
+<hr>
+<br>
+<h2>Complete History</h2>
+    <% if !@logs.empty? %>
+            <div class="row m-4">
+                <% @logs.each do |log| %>
+                    <div class="card col-sm-5 m-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title"><strong>  <i class="fas fa-hotel"></i> <%= log.hotel_name %></strong></h5>
+                            <h6 class="card-subtitle mb-2 text-muted"><strong><%= log.room_no %></strong></h6> 
+                            <p class="card-text text-success"><strong> <i class="fas fa-hourglass-start"></i> Start Date :</strong> <%= log.start_date %></p>
+                            <p class="card-text text-danger"><strong> <i class="fas fa-hourglass-end"></i> End Date :</strong><%= log.end_date %></p>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+            <% else %>
+            <h3>No logs.</h3>
+        <% end %> 
     <%= link_to 'Back', search_hotel_path ,class:"btn btn-dark" %>
 <% else %>
   <h1>Room Booking Application</h1>
