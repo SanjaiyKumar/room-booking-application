@@ -1,5 +1,6 @@
 class Room < ApplicationRecord
     belongs_to :hotel
+    has_many :logs
     validates :price, presence: true
     validates :room_no , presence: true
     validates :room_no , uniqueness: { scope: :hotel_id , message: " : %{value}  already exists" }
