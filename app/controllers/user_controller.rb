@@ -47,7 +47,7 @@ class UserController < ApplicationController
     @log.user_id= params[:user_id]
     @log.room_no= params[:room_no]
 
-      $rom = Room.find(params[:id])
+      # $rom = Room.find(params[:id])
       respond_to do |format|
         if @log.save
           format.html { redirect_to root_path, notice: "Room was successfully Booked." }

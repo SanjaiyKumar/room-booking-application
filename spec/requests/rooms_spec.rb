@@ -70,4 +70,27 @@ RSpec.describe "Rooms", type: :request do
       end
     end
 
+    context "Hotel Dashboard Flow" do
+      it "Successfull Response /rooms" do
+        allow_any_instance_of(RoomsController).to receive(:authenticate_hotel!) {true}
+        get '/rooms'
+        expect(response).to render_template 'rooms/index'
+      end
+      it "Successfull Response /rooms/new" do
+        allow_any_instance_of(RoomsController).to receive(:authenticate_hotel!) {true}
+        allow_any_instance_of(RoomsController).to receive(:current_hotel) {hotel}
+        get '/rooms'
+        get '/rooms/new'
+        expect(response).to render_template 'rooms/new'
+      end
+      it "Successfull Response /rooms/:id" do
+        allow_any_instance_of(RoomsController).to receive(:authenticate_hotel!) {true}
+        allow_any_instance_of(RoomsController).to receive(:current_hotel) {hotel}
+        get '/rooms'
+        room = create(:room,hotel_id:hotel.id)
+        get "/rooms/#{room.id}"
+        expect(response).to render_template 'rooms/show'
+      end
+    end
+
 end
